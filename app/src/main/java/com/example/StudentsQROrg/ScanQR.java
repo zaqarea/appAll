@@ -4,11 +4,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -59,16 +65,17 @@ public class ScanQR extends AppCompatActivity {
 //        String currentDateAndTime = sdf.format(new Date());
         if (result != null){
             if (result.getContents() != null){
-                String str2= result.getContents();
-                String[] str = str2.split("\\.");
+                String str2 = result.getContents();
+               // String[] str = str2.split("\\.");
                 try {
-                    arrayList2.addAll(Arrays.asList(str));
-                    insertPresence(studentId, arrayList2.get(0), arrayList2.get(1));
+                   // arrayList2.addAll(Arrays.asList(str));
+
+
                 }catch (Exception ignored){
                 }
-                Intent intent = new Intent(ScanQR.this, ListMyPresence.class);
-                startActivity(intent);
-                finish();
+
+                showDialogAddStatus();
+
             }else {
                 Toast.makeText(ScanQR.this, "No Result", Toast.LENGTH_SHORT).show();
             }
@@ -76,8 +83,8 @@ public class ScanQR extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-    private void insertPresence(String studentId2, String courseId, String lectureId) {
-        String url = getResources().getString(R.string.syncAddress);
+    private void insertPresence(String studentId2, String enterance) {
+        String url = "https://css4dev.com/QrCustomers/insertQr.php";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -103,9 +110,8 @@ public class ScanQR extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("studentId", studentId2);
-                params.put("courseId", courseId);
-                params.put("lectureId", lectureId);
+                params.put("employee_id", studentId2);
+                params.put("is_enterance", enterance);
                 return params;
             }
         };
@@ -122,7 +128,55 @@ public class ScanQR extends AppCompatActivity {
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             requestQueue.add(stringRequest);
         }
+    }
 
+    public void showDialogAddStatus() {
+        Dialog dialogAddStatus = new Dialog(ScanQR.this);
+        dialogAddStatus.setContentView(R.layout.dialog_login);
+        Button btnSignIn = dialogAddStatus.findViewById(R.id.btnSignIn);
+        Button btnCancel = dialogAddStatus.findViewById(R.id.btnCancel);
+//        CardView cardAddStatPrivate = dialogAddStatus.findViewById(R.id.cardAddStatPrivate);
+//        Button btnFinish = dialogAddStatus.findViewById(R.id.btnFinishDialog);
 
+        //  dialogAddStatus.getWindow().getAttributes().windowAnimations = R.style.DialogDown;
+        dialogAddStatus.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogAddStatus.getWindow().getAttributes().width = WindowManager.LayoutParams.MATCH_PARENT;
+        // dialogAddStatus.getWindow().getAttributes().gravity = 75;
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAddStatus.dismiss();
+                insertPresence(studentId, "0");
+                Intent intent = new Intent(ScanQR.this, Stats.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAddStatus.dismiss();
+                insertPresence(studentId, "1");
+                Intent intent = new Intent(ScanQR.this, Stats.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+//        cardAddStatPublic.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mainActivity, AddPostMain.class);
+//                startActivity(intent);
+//                dialogAddStatus.dismiss();
+//            }
+//        });
+//        btnFinish.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialogAddStatus.dismiss();
+//            }
+//        });
+        dialogAddStatus.show();
     }
 }

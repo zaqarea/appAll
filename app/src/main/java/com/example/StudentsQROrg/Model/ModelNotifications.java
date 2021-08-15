@@ -8,12 +8,22 @@ public class ModelNotifications implements Serializable {
     private String content;
     private String image;
     private String date;
+    private String title;
 
-    public ModelNotifications(String id, String content, String image, String date) {
+    public ModelNotifications(String id, String content, String image, String date, String title) {
+        this.title = title;
         this.id = id;
         this.content = content;
         this.image = image;
         this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getId() {

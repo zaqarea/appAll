@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_main) {
-            Intent intent = new Intent(MainActivity.this, ListMyPresence.class);
-            startActivity(intent);
-            return true;
+//            Intent intent = new Intent(MainActivity.this, ListMyPresence.class);
+//            startActivity(intent);
+//            return true;
         }else if (item.getItemId() == R.id.menu_scan_qr){
             Intent intent = new Intent(MainActivity.this, ScanQR.class);
             startActivity(intent);
