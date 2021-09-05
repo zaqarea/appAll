@@ -1,14 +1,19 @@
 package com.example.StudentsQROrg;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +22,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ListFragment extends Fragment {
-    private TextView btnInviteFriend, btnStats, btnEditProfile, btnSettings, btnRebortProblem;
+    private TextView btnInviteFriend, btnStats, btnEditProfile, btnSettings;
     private Button btnLogOut;
-    private Button userNameProfile;
+    private TextView userNameProfile;
     private TextView txtViewChangeImage;
-    private ImageView imageProfile;
+    private CircleImageView imageProfile;
+    CardView cardEditProfile, cardStats;
 
     private MainActivity mainActivity;
 
@@ -63,45 +86,14 @@ public class ListFragment extends Fragment {
 
         userNameProfile = view.findViewById(R.id.btnUserNameProfileFragment);
         imageProfile = view.findViewById(R.id.imageProfile);
-       // progressBar = view.findViewById(R.id.progressBarMenuFragment);
-        btnLogOut = view.findViewById(R.id.btnLogOut);
-        btnInviteFriend = view.findViewById(R.id.btnInviteFriend);
-        btnStats = view.findViewById(R.id.btnStats);
-        btnEditProfile = view.findViewById(R.id.btnEditProfile);
-        btnSettings = view.findViewById(R.id.btnSettings);
-        btnRebortProblem = view.findViewById(R.id.btnRebortProblem);
         txtViewChangeImage = view.findViewById(R.id.txtViewChangeImage);
 
-        btnRebortProblem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//              Intent intent = new Intent(mainActivity, ReportProblem.class);
-//              startActivity(intent);
+        @SuppressLint("WrongConstant")
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(Login.FILE_CHECK_USER2, Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("studentId2", "false");
 
-                Toast.makeText(mainActivity, "غير متاح حاليا", Toast.LENGTH_LONG).show();
-            }
-        });
-        btnEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mainActivity, EditInfoUser.class);
-                startActivity(intent);
-            }
-        });
-        btnSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(mainActivity, Settings.class);
-//                startActivity(intent);
-            }
-        });
-        btnInviteFriend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnInviteFriend.setEnabled(false);
-                shareUrlApp();
-            }
-        });
+        gerUserById(userId);
+
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,19 +127,6 @@ public class ListFragment extends Fragment {
 //                startActivity(intent);
             }
         });
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnLogOut.setEnabled(false);
-            }
-        });
-        btnStats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mainActivity, Stats.class);
-                startActivity(intent);
-            }
-        });
 
         return view;
     }
@@ -161,5 +140,72 @@ public class ListFragment extends Fragment {
         startActivity(Intent.createChooser(intent, getString(R.string.app_name)));
         btnInviteFriend.setEnabled(true);
     }
+
+    private void gerUserById(String userId) {
+        RequestQueue requestQueue = Volley.newRequestQueue(requireActivity());
+        requestQueue.getCache().clear();
+        String url = "https://css4dev.com/QrCustomers/getUserDetailsById.php";
+        StringRequest strRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("res",response);
+                try {
+                    JSONObject res = new JSONObject(response);
+                    JSONArray jsonArray = null;
+                    try {
+                        jsonArray = res.getJSONArray("Users");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject hit = null;
+                        try {
+                            hit = jsonArray.getJSONObject(i);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            String id = hit.getString("id");
+                            String name = hit.getString("name");
+                            String email = hit.getString("email");
+                            String password = hit.getString("password");
+                            String age = hit.getString("age");
+                            String phone = hit.getString("phone");
+
+                            userNameProfile.setText(name);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(requireActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
+//                            progressBar.setVisibility(View.GONE);
+                            error.printStackTrace();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("userId",userId);
+                return params;
+            }
+        };
+
+        strRequest.setShouldCache(false);
+        requestQueue.add(strRequest);
+    }
+
 
 }

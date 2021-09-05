@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECEFF1"
+    android:background="@color/colorBackground"
+    android:layoutDirection="rtl"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -13,41 +14,17 @@
         android:id="@+id/rel1536"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavMain"
         android:layout_below="@id/toolbarMain">
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/btnScan"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:backgroundTint="@color/teal_700"
-        android:text="افحص الكود"
-        android:textSize="18sp"
-        android:visibility="gone"
-        app:cornerRadius="10dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_700"
+        android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:titleTextColor="@color/white" />
-
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/bottomNavMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:mbn_backgroundBottomColor="@color/teal_700"
-        app:mbn_circleColor="@color/teal_200"
-        app:mbn_defaultIconColor="#ffffff"
-        app:mbn_selectedIconColor="@color/teal_700"
-        app:mbn_shadowColor="@color/teal_200"
-        tools:ignore="MissingClass" />
 
 </RelativeLayout>

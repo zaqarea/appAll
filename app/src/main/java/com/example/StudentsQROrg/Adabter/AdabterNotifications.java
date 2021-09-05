@@ -5,24 +5,23 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.StudentsQROrg.Model.ModelLecture;
 import com.example.StudentsQROrg.Model.ModelNotifications;
 import com.example.StudentsQROrg.R;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AdabterNotifications extends RecyclerView.Adapter<AdabterNotifications.NotificationsViewHolder> {
 
     private final ArrayList<ModelNotifications> notificationsArrayList;
     private final Context context;
-    public static final String LECTURE = "lecture";
 
     public AdabterNotifications(ArrayList<ModelNotifications> notificationsArrayList, Context context) {
         this.context = context;
@@ -63,13 +62,13 @@ public class AdabterNotifications extends RecyclerView.Adapter<AdabterNotificati
 
     //Class Recycler HolderView
     static class NotificationsViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtViewRowNotification;
-        ImageView imgViewRowNotification;
+        TextView txtViewRowNotification;
+        CircleImageView imgViewRowNotification;
 
         public NotificationsViewHolder(@NonNull View itemView) {
             super(itemView);
             txtViewRowNotification = itemView.findViewById(R.id.txtViewRowNotification);
-            imgViewRowNotification = itemView.findViewById(R.id.imgViewRowNotification);
+            imgViewRowNotification = itemView.findViewById(R.id.imageProfile);
         }
     }
 }

@@ -3,32 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:layoutDirection="rtl"
+    android:padding="30dp"
     app:cardCornerRadius="15dp"
     app:cardElevation="3dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView7"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/cairo"
+            android:gravity="center"
+            android:textColor="@color/textColor"
             android:text="تسجيل الرمز"
-            android:textSize="18sp" />
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0.7"
+            android:padding="5dp"
+            android:src="@drawable/padlock" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView7"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/btnLogOut"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/colorBackgroundSecondary"
+                android:fontFamily="@font/cairo"
+                android:text="خروج"
+                android:textColor="@color/textColor"
+                android:textSize="16sp"
+                app:cornerRadius="15dp" />
             <Button
                 android:id="@+id/btnSignIn"
                 android:layout_width="0dp"
@@ -36,22 +62,15 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/teal_700"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/cairo"
                 android:text="دخول"
-                android:textSize="16sp" />
+                android:elevation="5dp"
+                android:textColor="@color/textWhite"
+                android:textSize="16sp"
+                app:cornerRadius="15dp" />
 
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:backgroundTint="#C3C2C2"
-                android:text="خروج"
-                android:textSize="16sp" />
 
         </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

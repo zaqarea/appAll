@@ -4,42 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:layoutDirection="rtl"
     tools:context=".Stats">
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayoutListStats"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="5dp"
-        app:tabIndicatorColor="@color/teal_700"
-        app:tabSelectedTextColor="@color/teal_700">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="الشهر الحالي" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ايام غيابي" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="عدد ساعات التأحير" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="دوامي" />
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerStats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tabLayoutListStats" />
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextColor="@color/white"/>
 
 </RelativeLayout>

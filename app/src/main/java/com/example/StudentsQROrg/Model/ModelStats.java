@@ -5,19 +5,27 @@ import java.io.Serializable;
 public class ModelStats implements Serializable {
 
     private String id;
-    private String dateMonth;
-    private String day;
-    private String delay;
-    private String entryTime;
-    private String outTime;
+    private String exsitDate;
+    private String entranceDate;
+    private String isExsist;
+    private String lateHoursOfDay;
 
-    public ModelStats(String id, String dateMonth, String day, String delay, String entryTime, String outTime) {
+    private String lateHoursOfMonth;
+    private String absenceDaysOfMonth;
+    private String presenceDaysOfMonth;
+
+    public ModelStats(String id, String exsitDate, String entranceDate, String isExsist, String lateHoursOfDay) {
         this.id = id;
-        this.dateMonth = dateMonth;
-        this.day = day;
-        this.delay = delay;
-        this.entryTime = entryTime;
-        this.outTime = outTime;
+        this.exsitDate = exsitDate;
+        this.entranceDate = entranceDate;
+        this.isExsist = isExsist;
+        this.lateHoursOfDay = lateHoursOfDay;
+    }
+
+    public ModelStats(String lateHoursOfMonth, String absenceDaysOfMonth, String presenceDaysOfMonth) {
+        this.lateHoursOfMonth = lateHoursOfMonth;
+        this.absenceDaysOfMonth = absenceDaysOfMonth;
+        this.presenceDaysOfMonth = presenceDaysOfMonth;
     }
 
     public String getId() {
@@ -28,43 +36,59 @@ public class ModelStats implements Serializable {
         this.id = id;
     }
 
-    public String getDateMonth() {
-        return dateMonth;
+    public String getExsitDate() {
+        return exsitDate;
     }
 
-    public void setDateMonth(String dateMonth) {
-        this.dateMonth = dateMonth;
+    public void setExsitDate(String exsitDate) {
+        this.exsitDate = exsitDate;
     }
 
-    public String getDay() {
-        return day;
+    public String getEntranceDate() {
+        return entranceDate;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setEntranceDate(String entranceDate) {
+        this.entranceDate = entranceDate;
     }
 
-    public String getDelay() {
-        return delay;
+    public String getIsExsist() {
+        return isExsist;
     }
 
-    public void setDelay(String delay) {
-        this.delay = delay;
+    public void setIsExsist(String isExsist) {
+        this.isExsist = isExsist;
     }
 
-    public String getEntryTime() {
-        return entryTime;
+    public String getLateHoursOfDay() {
+        return lateHoursOfDay;
     }
 
-    public void setEntryTime(String entryTime) {
-        this.entryTime = entryTime;
+    public void setLateHoursOfDay(String lateHoursOfDay) {
+        this.lateHoursOfDay = lateHoursOfDay;
     }
 
-    public String getOutTime() {
-        return outTime;
+    public String getLateHoursOfMonth() {
+        return lateHoursOfMonth;
     }
 
-    public void setOutTime(String outTime) {
-        this.outTime = outTime;
+    public void setLateHoursOfMonth(String lateHoursOfMonth) {
+        this.lateHoursOfMonth = lateHoursOfMonth;
+    }
+
+    public String getAbsenceDaysOfMonth() {
+        return absenceDaysOfMonth;
+    }
+
+    public void setAbsenceDaysOfMonth(String absenceDaysOfMonth) {
+        this.absenceDaysOfMonth = absenceDaysOfMonth;
+    }
+
+    public String getPresenceDaysOfMonth() {
+        return presenceDaysOfMonth;
+    }
+
+    public void setPresenceDaysOfMonth(String presenceDaysOfMonth) {
+        this.presenceDaysOfMonth = presenceDaysOfMonth;
     }
 }

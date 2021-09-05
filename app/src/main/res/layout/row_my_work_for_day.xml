@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
+    android:layoutDirection="rtl"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtViewDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo"
+                android:text="يوم الثلاثاء"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtViewDateMonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cairo"
+                android:paddingRight="10dp"
+                android:text="12/8/2021"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorBackgroundSecondary" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="center"
+                    android:text="وقت دخولي"
+                    android:textColor="@color/textColor2"
+                    android:textSize="11sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/entry"
+                    app:tint="@color/textColor2" />
+
+                <TextView
+                    android:id="@+id/txtViewEntryTimeWork"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="center"
+                    android:text="لم يحسب بعد"
+                    android:textColor="@color/green"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackgroundSecondary"
+                tools:ignore="Suspicious0dp" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="center"
+                    android:text="وقت خروجي"
+                    android:textColor="@color/textColor2"
+                    android:textSize="11sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:rotationY="-180"
+                    android:src="@drawable/exit"
+                    app:tint="@color/textColor2" />
+
+                <TextView
+                    android:id="@+id/txtViewTimeOutWork"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="center"
+                    android:text="لم يحسب بعد"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBackgroundSecondary"
+                tools:ignore="Suspicious0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="center"
+                    android:text="حالة اليوم"
+                    android:textColor="@color/textColor2"
+                    android:textSize="11sp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/delay"
+                    app:tint="@color/textColor2" />
+
+                <TextView
+                    android:id="@+id/txtViewStatusWork"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:gravity="center"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:tint="@color/textColor2" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/delay"
+                app:tint="@color/textColor2" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="مدة التأخير:"
+                    android:textColor="@color/textColor2"
+                    android:textSize="11sp" />
+
+
+                <TextView
+                    android:id="@+id/txtViewDelay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/cairo"
+                    android:text="1 ساعة"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:tint="@color/textColor2" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

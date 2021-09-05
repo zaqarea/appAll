@@ -1,29 +1,44 @@
 package com.example.StudentsQROrg;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-        Button btnScan;
-        Toolbar toolbar;
-        private String studentId;
-    @SuppressLint("StaticFieldLeak")
-    public MeowBottomNavigation meowBottomNavigation;
+
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,67 +46,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.toolbarMain);
-        btnScan = findViewById(R.id.btnScan);
-        meowBottomNavigation = findViewById(R.id.bottomNavMain);
         setSupportActionBar(toolbar);
 
-        @SuppressLint("WrongConstant")
-        SharedPreferences sharedPreferences = getSharedPreferences(Login.FILE_CHECK_USER2, Context.MODE_PRIVATE);
-        studentId = sharedPreferences.getString("studentId2", "false");
 
-        meowBottomNavigation.show(1, true);
-        meowBottomNavigation.setSelected(true);
+        FragmentManager fm1 = getSupportFragmentManager();
+        FragmentTransaction ft1 = fm1.beginTransaction();
+        NotificationsFragment fragment1 = new NotificationsFragment();
+        ft1.replace(R.id.rel1536, fragment1);
+        ft1.commit();
 
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_notifications));
-        meowBottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_account));
-       // meowBottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_calender));
-
-        meowBottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
-            @Override
-            public void onClickItem(MeowBottomNavigation.Model item) {
-                switch (item.getId()){
-                    case 1:
-                        toolbar.setTitle("الاشعارات");
-                        FragmentManager fm1 = getSupportFragmentManager();
-                        FragmentTransaction ft1 = fm1.beginTransaction();
-                        NotificationsFragment fragment1 = new NotificationsFragment();
-                        ft1.replace(R.id.rel1536, fragment1);
-                        ft1.commit();
-                        break;
-                    case 2:
-                        toolbar.setTitle("القائمة");
-                        FragmentManager fm = getSupportFragmentManager();
-                        FragmentTransaction ft = fm.beginTransaction();
-                        ListFragment fragment = new ListFragment();
-                        ft.replace(R.id.rel1536, fragment);
-                        ft.commit();
-                        //toolbar.getMenu().findItem(R.id.menu_search).setVisible(true);
-                       // toolbar.getMenu().findItem(R.id.menu_search).setVisible(false);
-                        break;
-
-                }
-            }
-        });
-        meowBottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
-            @Override
-            public void onShowItem(MeowBottomNavigation.Model item) {
-
-            }
-        });
-        meowBottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
-            @Override
-            public void onReselectItem(MeowBottomNavigation.Model item) {
-
-            }
-        });
-
-        btnScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ScanQR.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
@@ -99,19 +62,42 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_list_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_main) {
-//            Intent intent = new Intent(MainActivity.this, ListMyPresence.class);
-//            startActivity(intent);
-//            return true;
-        }else if (item.getItemId() == R.id.menu_scan_qr){
-            Intent intent = new Intent(MainActivity.this, ScanQR.class);
-            startActivity(intent);
+        if (item.getItemId() == R.id.menu_notifications) {
+            FragmentManager fm1 = getSupportFragmentManager();
+            FragmentTransaction ft1 = fm1.beginTransaction();
+            NotificationsFragment fragment1 = new NotificationsFragment();
+            ft1.replace(R.id.rel1536, fragment1);
+            ft1.commit();
+
             return true;
+        }else if (item.getItemId() == R.id.menu_stats){
+            FragmentManager fm1 = getSupportFragmentManager();
+            FragmentTransaction ft1 = fm1.beginTransaction();
+            StatsFragment fragment1 = new StatsFragment();
+            ft1.replace(R.id.rel1536, fragment1);
+            ft1.commit();
+
+            return true;
+        }else {
+            FragmentManager fm1 = getSupportFragmentManager();
+            FragmentTransaction ft1 = fm1.beginTransaction();
+            ListFragment fragment1 = new ListFragment();
+            ft1.replace(R.id.rel1536, fragment1);
+            ft1.commit();
+
         }
         return super.onOptionsItemSelected(item);
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        toolbar.setTitle("الاشعارات");
+    }
+
+
+
 }

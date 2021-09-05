@@ -2,16 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_scan_qr"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_scan_qr"
-        android:title="فحص الكود"
-        />
+    <item
+        android:id="@+id/menu_notifications"
+        android:icon="@drawable/ic_notifications"
+        android:title="الإشعارات"
+        app:showAsAction="always" />
 
-    <item android:title="القائمة الرئيسية"
+    <item
+        android:id="@+id/menu_stats"
+        android:icon="@drawable/ic_stats"
+        android:title="الإحصائيات"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_main"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_menu"/>
+        android:icon="@drawable/icaccount_white"
+        android:title="الملف الشخصي"
+        app:showAsAction="always" />
 
 
 </menu>

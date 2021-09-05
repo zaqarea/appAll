@@ -4,70 +4,150 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:layoutDirection="rtl"
     tools:context=".Login">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:hint="ادخل بريدك"
-            android:textColorHint="@color/teal_700"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:startIconDrawable="@drawable/ic_email">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTxtEmail"
-                android:layout_width="match_parent"
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_centerInParent="true"
+                android:translationZ="20dp"
+                android:visibility="gone">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:hint="ادخل كلمة السر"
-            android:textColorHint="@color/teal_700"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:startIconDrawable="@drawable/ic_password">
+            </ProgressBar>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTxtPassword"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="@color/teal_700"
-            android:text="Login"
-            app:cornerRadius="10dp" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/cairo"
+                    android:text="تسجيل الدخول"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/teal_700"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:titleTextColor="@color/white"
-        app:title="LOGIN"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/cairo"
+                    android:text="أهلاً وسهلاً بكم.."
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/login">
+
+                </ImageView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border_signin"
+                    android:elevation="5dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Animation.Design.BottomSheetDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="الإيميل"
+
+                        android:textColorHint="@color/textColor"
+                        app:boxBackgroundColor="@null"
+                        app:endIconTint="@color/colorPrimary"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_email"
+                        app:startIconTint="@color/colorPrimary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTxtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/cairo"
+                            android:inputType="textEmailAddress"
+                            android:textSize="14sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Animation.Design.BottomSheetDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:hint="كلمة المرور"
+                        android:textColorHint="@color/textColor"
+                        app:boxBackgroundColor="@null"
+                        app:endIconMode="password_toggle"
+                        app:endIconTint="@color/colorPrimary"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_password"
+                        app:startIconTint="@color/colorPrimary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/editTxtPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/cairo"
+                            android:inputType="textPassword"
+                            android:textSize="14sp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <Button
+                        android:id="@+id/btnLogin"
+                        style="@style/Widget.MaterialComponents.Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/cairo"
+                        android:gravity="center"
+                        android:shadowRadius="5"
+                        android:text="تسجيل الدخول"
+                        android:textColor="@color/textWhite"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:cornerRadius="15dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
 
 </RelativeLayout>
