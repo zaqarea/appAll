@@ -3,6 +3,7 @@ package com.example.StudentsQROrg.Adabter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,10 @@ public class AdabterStatsForDay extends RecyclerView.Adapter<AdabterStatsForDay.
             holder.txtViewTimeOut.setText(modelStats.getExsitDate());
             holder.txtViewStatus.setText("متواجد");
             holder.txtViewStatus.setTextColor(Color.GREEN);
+            holder.txtViewLateHoursDay.setText(modelStats.getLateHoursOfDay() + " " + "ساعة");
+            holder.txtViewDay.setText(modelStats.getDay());
         }else {
+            holder.txtViewDay.setText(modelStats.getDay());
             holder.txtViewStatus.setText("غائب");
             holder.txtViewStatus.setTextColor(Color.RED);
         }
@@ -66,13 +70,13 @@ public class AdabterStatsForDay extends RecyclerView.Adapter<AdabterStatsForDay.
 
     //Class Recycler HolderView
     static class StatsDayViewHolder extends RecyclerView.ViewHolder {
-        TextView txtViewDateMonth, txtViewDay, txtViewEntryTime, txtViewTimeOut, txtViewStatus;
+        TextView txtViewDay, txtViewLateHoursDay, txtViewEntryTime, txtViewTimeOut, txtViewStatus;
       //  ImageView imgViewRowNotification;
 
         public StatsDayViewHolder(@NonNull View itemView) {
             super(itemView);
-//            txtViewDateMonth = itemView.findViewById(R.id.txtViewDateMonth);
-//            txtViewDay = itemView.findViewById(R.id.txtViewDay);
+            txtViewDay = itemView.findViewById(R.id.txtViewDay);
+            txtViewLateHoursDay = itemView.findViewById(R.id.txtViewLateHoursDay);
             txtViewEntryTime = itemView.findViewById(R.id.txtViewEntryTimeWork);
             txtViewTimeOut = itemView.findViewById(R.id.txtViewTimeOutWork);
             txtViewStatus = itemView.findViewById(R.id.txtViewStatusWork);

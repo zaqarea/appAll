@@ -48,8 +48,6 @@ public class Login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         progress_bar = findViewById(R.id.progress_bar);
 
-
-
         @SuppressLint("WrongConstant")
         SharedPreferences sharedPreferences = getSharedPreferences(FILE_CHECK_USER, Context.MODE_PRIVATE);
         String userData = sharedPreferences.getString("checkUser", "false");

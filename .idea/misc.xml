@@ -41,6 +41,7 @@
         <entry key="..\:/AndriodProject/Android/orgQR/QR/StudentsQROrg/app/src/main/res/layout/row_students.xml" value="0.5" />
         <entry key="..\:/AndriodProject/Android/orgQR/QR/StudentsQROrg/app/src/main/res/menu/menu_list_main.xml" value="0.20416666666666666" />
         <entry key="..\:/AndriodProject/Android/orgQR/QR/StudentsQROrg/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2203125" />
+        <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/drawable/border_circle.xml" value="0.2203125" />
         <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/layout/dialog_login.xml" value="0.25" />
         <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/layout/fragment_notifications.xml" value="0.15648148148148147" />
         <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/layout/fragment_stats.xml" value="0.25" />
@@ -48,6 +49,7 @@
         <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/layout/row_my_work.xml" value="0.33" />
         <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/layout/row_my_work_absence.xml" value="0.33" />
         <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/layout/row_my_work_delay.xml" value="0.33" />
+        <entry key="..\:/orgQR/StudentsQROrg/StudentsQROrg/app/src/main/res/layout/row_my_work_for_day.xml" value="0.25" />
       </map>
     </option>
   </component>

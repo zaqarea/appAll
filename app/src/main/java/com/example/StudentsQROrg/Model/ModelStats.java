@@ -9,12 +9,13 @@ public class ModelStats implements Serializable {
     private String entranceDate;
     private String isExsist;
     private String lateHoursOfDay;
+    private String day;
 
     private String lateHoursOfMonth;
     private String absenceDaysOfMonth;
     private String presenceDaysOfMonth;
 
-    public ModelStats(String id, String exsitDate, String entranceDate, String isExsist, String lateHoursOfDay) {
+    public ModelStats(String id, String exsitDate, String entranceDate, String isExsist, String lateHoursOfDay, String dsdsd) {
         this.id = id;
         this.exsitDate = exsitDate;
         this.entranceDate = entranceDate;
@@ -26,6 +27,22 @@ public class ModelStats implements Serializable {
         this.lateHoursOfMonth = lateHoursOfMonth;
         this.absenceDaysOfMonth = absenceDaysOfMonth;
         this.presenceDaysOfMonth = presenceDaysOfMonth;
+    }
+
+    public ModelStats(String exsitDate, String entranceDate, String isExsist, String lateHoursOfDay, String day) {
+        this.day = day;
+        this.lateHoursOfDay = lateHoursOfDay;
+        this.exsitDate = exsitDate;
+        this.entranceDate = entranceDate;
+        this.isExsist = isExsist;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getId() {

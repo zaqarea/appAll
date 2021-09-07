@@ -30,6 +30,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.StudentsQROrg.Common.Common;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
 
+        FirebaseMessaging.getInstance().subscribeToTopic(Common.topicName);
 
         FragmentManager fm1 = getSupportFragmentManager();
         FragmentTransaction ft1 = fm1.beginTransaction();

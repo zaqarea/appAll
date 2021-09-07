@@ -39,9 +39,9 @@ public class AdabterStatsForMonth extends RecyclerView.Adapter<AdabterStatsForMo
     public void onBindViewHolder(@NonNull StatsMonthViewHolder holder, int position) {
         ModelStats modelStats = statsArrayList.get(position);
 
-        holder.txtViewLateHoursMonth.setText(modelStats.getDelay());
-        holder.txtViewTimeOutMonth.setText(modelStats.getOutTime());
-        holder.txtViewEntryTimeMonth.setText(modelStats.getEntranceDate());
+//        holder.txtViewLateHoursMonth.setText(modelStats.getLateHoursOfMonth());
+//        holder.txtViewTimeOutMonth.setText(modelStats.getExsitDate());
+//        holder.txtViewEntryTimeMonth.setText(modelStats.getEntranceDate());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

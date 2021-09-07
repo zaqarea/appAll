@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo"
-                android:text="يوم الثلاثاء"
+                android:text="يوم الثلاثاء 12/8/2021"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -43,7 +43,8 @@
                 android:text="12/8/2021"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
 
 
@@ -207,12 +208,11 @@
 
 
                 <TextView
-                    android:id="@+id/txtViewDelay"
+                    android:id="@+id/txtViewLateHoursDay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cairo"
                     android:text="1 ساعة"
-                    android:textColor="@color/red"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     app:tint="@color/textColor2" />

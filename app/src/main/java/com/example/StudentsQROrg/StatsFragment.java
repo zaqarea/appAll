@@ -82,8 +82,8 @@ public class StatsFragment extends Fragment {
         recyclerView = v.findViewById(R.id.recyclerStats);
         txtViewDay = v.findViewById(R.id.txtViewDay);
 
-        OffsetDateTime currentDate = OffsetDateTime.now(ZoneOffset.UTC );
-        currentMonth = currentDate.getMonthValue()+"";
+//        OffsetDateTime currentDate = OffsetDateTime.now(ZoneOffset.UTC );
+//        currentMonth = currentDate.getMonthValue()+"";
 
         @SuppressLint("WrongConstant")
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(Login.FILE_CHECK_USER2, Context.MODE_PRIVATE);
@@ -147,11 +147,13 @@ public class StatsFragment extends Fragment {
                             String exsitDate = hit.getString("exsitDate");
                             String entranceDate = hit.getString("entranceDate");
                             String isExsist = hit.getString("isExsist");
+                            String lateHours = hit.getString("hours");
+                            String day = hit.getString("day");
 
-                            Log.d("vvvvvvvv",isExsist);
-                            Log.d("vvvvvvvv2",entranceDate);
+                            Log.d("vvvvvvvv660",isExsist);
+                            Log.d("vvvvvvvv6602",entranceDate);
 
-                            ModelStats modelStats = new ModelStats(exsitDate, entranceDate, isExsist);
+                            ModelStats modelStats = new ModelStats(exsitDate, entranceDate, isExsist, lateHours, day);
                             arrayList.add(modelStats);
 
                         }catch (JSONException e) {
@@ -252,79 +254,5 @@ public class StatsFragment extends Fragment {
         strRequest.setShouldCache(false);
         requestQueue.add(strRequest);
     }
-
-
-//    private void getWorkScheduleStats(){
-//        RequestQueue requestQueue = Volley.newRequestQueue(requireActivity());
-//        requestQueue.getCache().clear();
-//        String url = "https://css4dev.com/QrCustomers/selectWorkSchedule.php";
-//        StringRequest strRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.d("res",response);
-//                try {
-//                    JSONObject res = new JSONObject(response);
-//                    JSONArray jsonArray = null;
-//                    try {
-//                        jsonArray = res.getJSONArray("absenceDays");
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    arrayList.clear();
-//                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject hit = null;
-//                        try {
-//                            hit = jsonArray.getJSONObject(i);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                        try {
-//
-//                            String exsitDate = hit.getString("exsitDate");
-//                            String absenceDays = hit.getString("absenceDays");
-//                            String name = hit.getString("name");
-//
-//
-//                                    ""=>$rs['entranceDate'], "isExsist"=>$rs['isExsist']
-//
-//                            ModelStats modelStats = new ModelStats(employee_id, absenceDays, name);
-//                            arrayList.add(modelStats);
-//
-//                        }catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    adabterStatsForDay = new AdabterStatsForDay(arrayList, getActivity());
-//                    recyclerStats.setAdapter(adabterStatsForDay);
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        },
-//                new Response.ErrorListener()
-//                {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
-//                        // progressBar.setVisibility(View.GONE);
-//                        error.printStackTrace();
-//                    }
-//                })
-//        {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("month_number", currentMonth);
-//                params.put("employeeId", employeeId);
-//                return params;
-//            }
-//        };
-//
-//        strRequest.setShouldCache(false);
-//        requestQueue.add(strRequest);
-//    }
-
 
 }
