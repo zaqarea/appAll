@@ -40,8 +40,13 @@ public class AdabterNotifications extends RecyclerView.Adapter<AdabterNotificati
     public void onBindViewHolder(@NonNull NotificationsViewHolder holder, int position) {
         ModelNotifications modelNotifications = notificationsArrayList.get(position);
 
-        holder.txtViewRowNotification.setText(modelNotifications.getContent());
-        Glide.with(context).load(modelNotifications.getImage()).placeholder(R.drawable.ic_account).into(holder.imgViewRowNotification);
+        if (modelNotifications.getContent() != null) {
+            holder.txtViewRowNotificationBody.setText(modelNotifications.getContent());
+        }
+        if (modelNotifications.getTitle() != null) {
+            holder.txtViewTitle.setText(modelNotifications.getTitle());
+        }
+      //  Glide.with(context).load(modelNotifications.getImage()).placeholder(R.drawable.ic_account).into(holder.imgViewRowNotification);
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -62,13 +67,14 @@ public class AdabterNotifications extends RecyclerView.Adapter<AdabterNotificati
 
     //Class Recycler HolderView
     static class NotificationsViewHolder extends RecyclerView.ViewHolder {
-        TextView txtViewRowNotification;
+        TextView txtViewTitle, txtViewRowNotificationBody;
         CircleImageView imgViewRowNotification;
 
         public NotificationsViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtViewRowNotification = itemView.findViewById(R.id.txtViewRowNotification);
+            txtViewTitle = itemView.findViewById(R.id.txtViewRowNotification);
             imgViewRowNotification = itemView.findViewById(R.id.imageProfile);
+            txtViewRowNotificationBody = itemView.findViewById(R.id.txtViewRowNotificationBody);
         }
     }
 }

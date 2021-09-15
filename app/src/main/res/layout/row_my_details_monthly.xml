@@ -29,18 +29,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo"
-                android:text="شهر أيلول"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txtViewDateMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cairo"
-                android:paddingRight="10dp"
-                android:text="8/2021"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="8/2021 شهر أيلول"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -82,15 +83,15 @@
                     app:tint="@color/textColor2" />
 
                 <TextView
-                    android:id="@+id/txtViewEntryTimeMonth"
+                    android:id="@+id/txtViewAbsenceDayMonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cairo"
                     android:gravity="center"
                     android:text="12:60:60"
                     android:textColor="@color/green"
-                    android:textStyle="bold"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -124,7 +125,7 @@
                     app:tint="@color/textColor2" />
 
                 <TextView
-                    android:id="@+id/txtViewTimeOutMonth"
+                    android:id="@+id/txtViewDayOutMonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/cairo"

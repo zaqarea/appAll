@@ -163,10 +163,6 @@ public class NotificationsFragment extends Fragment {
                                 String Title = hit.getString("Title");
                                 String Body = hit.getString("Body");
 
-                                Log.d("saas1",id);
-                                Log.d("saas2",Title);
-                                Log.d("saas3",Body);
-
                                 ModelNotifications modelNotifications = new ModelNotifications(id, Body, null, null, Title);
                                 arrayList.add(modelNotifications);
 
@@ -189,7 +185,7 @@ public class NotificationsFragment extends Fragment {
                     {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
+                     //       Toast.makeText(getActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
                            // progressBar.setVisibility(View.GONE);
                             error.printStackTrace();
                         }

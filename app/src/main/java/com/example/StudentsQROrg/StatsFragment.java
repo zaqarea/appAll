@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.StudentsQROrg.Adabter.AdabterStatsForDay;
+import com.example.StudentsQROrg.Adabter.AdabterStatsForMonth;
 import com.example.StudentsQROrg.Model.ModelStats;
 import com.google.android.material.tabs.TabLayout;
 
@@ -43,10 +44,11 @@ public class StatsFragment extends Fragment {
     TabLayout tabLayout;
     RecyclerView recyclerView;
     AdabterStatsForDay adabterStatsForDay;
+    AdabterStatsForMonth adabterStatsForMonth;
     ArrayList<ModelStats> arrayList = new ArrayList<>();
     TextView txtViewDay;
 
-    private String employeeId;
+    private String employeeIdS;
     String currentMonth;
 
     public StatsFragment() {
@@ -82,26 +84,26 @@ public class StatsFragment extends Fragment {
         recyclerView = v.findViewById(R.id.recyclerStats);
         txtViewDay = v.findViewById(R.id.txtViewDay);
 
-//        OffsetDateTime currentDate = OffsetDateTime.now(ZoneOffset.UTC );
+//        OffsetDateTime currentDate = OffsetDateTime.now(ZoneOffset.UTC);
 //        currentMonth = currentDate.getMonthValue()+"";
 
         @SuppressLint("WrongConstant")
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(Login.FILE_CHECK_USER2, Context.MODE_PRIVATE);
-        employeeId = sharedPreferences.getString("employeeId", "false");
+        employeeIdS = sharedPreferences.getString("employeeId", "false");
 
-        if (!employeeId.equals("false")) {
-            getWorkScheduleByEmployeeId(employeeId);
+        if (!employeeIdS.equals("false")) {
+            getWorkScheduleByEmployeeId(employeeIdS);
         }
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0){
-                    if (!employeeId.equals("false")) {
-                        getWorkScheduleByEmployeeId(employeeId);
+                    if (!employeeIdS.equals("false")) {
+                        getWorkScheduleByEmployeeId(employeeIdS);
                     }
                 }else if (tab.getPosition() == 1){
-
+                    selectMonthlyLateHoursForEmployee(employeeIdS);
                 }
             }
 
@@ -150,9 +152,6 @@ public class StatsFragment extends Fragment {
                             String lateHours = hit.getString("hours");
                             String day = hit.getString("day");
 
-                            Log.d("vvvvvvvv660",isExsist);
-                            Log.d("vvvvvvvv6602",entranceDate);
-
                             ModelStats modelStats = new ModelStats(exsitDate, entranceDate, isExsist, lateHours, day);
                             arrayList.add(modelStats);
 
@@ -174,7 +173,7 @@ public class StatsFragment extends Fragment {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(getActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
                         // progressBar.setVisibility(View.GONE);
                         Log.d("vvvvv2vvv",error.getMessage());
                         error.printStackTrace();
@@ -197,19 +196,21 @@ public class StatsFragment extends Fragment {
     private void selectMonthlyLateHoursForEmployee(String employeeId){
         RequestQueue requestQueue = Volley.newRequestQueue(requireActivity());
         requestQueue.getCache().clear();
-        String url = "https://css4dev.com/QrCustomers/selectMonthlyLateHoursForEmployee.php";
+        String url = "https://css4dev.com/QrCustomers/selectMonthDetailsForEmployee.php";
         StringRequest strRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(String response) {
-                Log.d("resdddd",response);
+                Log.d("resdddd3",response);
                 try {
                     JSONObject res = new JSONObject(response);
                     JSONArray jsonArray = null;
                     try {
-                        jsonArray = res.getJSONArray("lateHours");
+                        jsonArray = res.getJSONArray("absenceDays");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    arrayList.clear();
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject hit = null;
                         try {
@@ -218,14 +219,27 @@ public class StatsFragment extends Fragment {
                             e.printStackTrace();
                         }
                         try {
-                            String hours = hit.getString("hours");
+                            String absenceDays = hit.getString("absenceDays");
+                            String lateHours = hit.getString("lateHours");
+                            String exsistDays = hit.getString("ExsistDays");
 
-//                            Log.d("vvvvvvvv",isExsist);
-//                            Log.d("vvvvvvvv2",entranceDate);
+                            Log.d("vvvvvvvv1",absenceDays);
+                            Log.d("vvvvvvvv2",lateHours);
+                            Log.d("vvvvvvvv3",exsistDays);
+
+                            ModelStats modelStats = new ModelStats(lateHours, absenceDays, exsistDays);
+                            arrayList.add(modelStats);
+
                         }catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
+
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    recyclerView.setHasFixedSize(true);
+                    adabterStatsForMonth = new AdabterStatsForMonth(arrayList, getActivity());
+                    recyclerView.setAdapter(adabterStatsForMonth);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -235,9 +249,8 @@ public class StatsFragment extends Fragment {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getActivity(), "error.getMessage()", Toast.LENGTH_SHORT).show();
                         // progressBar.setVisibility(View.GONE);
-                        Log.d("vvvvv2vvv",error.getMessage());
                         error.printStackTrace();
                     }
                 })
@@ -246,7 +259,7 @@ public class StatsFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("month_number", "8");
-                params.put("employeeId", employeeId);
+                params.put("emp", employeeId);
                 return params;
             }
         };

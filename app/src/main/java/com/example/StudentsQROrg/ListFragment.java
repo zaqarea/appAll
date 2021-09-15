@@ -90,9 +90,9 @@ public class ListFragment extends Fragment {
 
         @SuppressLint("WrongConstant")
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences(Login.FILE_CHECK_USER2, Context.MODE_PRIVATE);
-        String userId = sharedPreferences.getString("studentId2", "false");
+         String userIdS = sharedPreferences.getString("studentId2", "false");
 
-        gerUserById(userId);
+        gerUserById(userIdS);
 
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +141,7 @@ public class ListFragment extends Fragment {
         btnInviteFriend.setEnabled(true);
     }
 
-    private void gerUserById(String userId) {
+    private void gerUserById(String userId2) {
         RequestQueue requestQueue = Volley.newRequestQueue(requireActivity());
         requestQueue.getCache().clear();
         String url = "https://css4dev.com/QrCustomers/getUserDetailsById.php";
@@ -198,7 +198,7 @@ public class ListFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("userId",userId);
+                params.put("userId",userId2);
                 return params;
             }
         };
@@ -206,6 +206,5 @@ public class ListFragment extends Fragment {
         strRequest.setShouldCache(false);
         requestQueue.add(strRequest);
     }
-
 
 }
